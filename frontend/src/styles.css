@@ -1,0 +1,252 @@
+:root{
+  --bg:#f0f2f5;
+  --side:#ffffff;
+  --accent:#25D366;
+  --muted:#6b7280;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body,html,#root{
+  height:100%;
+  margin:0;
+  font-family:Inter, system-ui, Arial;
+  background:var(--bg);
+}
+
+.app{
+  display:flex;
+  height:100vh;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar{
+  width:320px;
+  border-right:1px solid #e5e7eb;
+  background:var(--side);
+  display:flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  z-index: 30;
+}
+
+.brand{
+  padding:16px;
+  margin:0;
+  font-weight:700;
+  border-bottom:1px solid #eee;
+}
+
+.chat-list{
+  padding:8px;
+  overflow-y:auto;
+  flex:1;
+}
+
+.chat-item{
+  padding:12px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-bottom:6px;
+  transition: background 0.2s ease;
+}
+
+.chat-item:hover{
+  background:#f3f4f6;
+}
+
+.chat-title{
+  font-weight:600;
+}
+
+.chat-sub{
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* Chat area */
+.chat-area{
+  flex:1;
+  display:flex;
+  flex-direction: column;
+  background: var(--bg);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Chat window */
+.chat-window{
+  display:flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.chat-header{
+  padding:12px 16px;
+  border-bottom:1px solid #eee;
+  background:#fff;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Back button for mobile */
+.back-btn {
+  background: var(--accent);
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  display: none;
+}
+
+/* Messages container */
+.messages{
+  flex:1;
+  padding:16px;
+  overflow-y:auto;
+  background: linear-gradient(#f8fafc, #f0f2f5);
+  scroll-behavior: smooth;
+}
+
+/* Message bubble */
+.bubble{
+  max-width:72%;
+  padding:10px 12px;
+  margin-bottom:10px;
+  border-radius:12px;
+  background:#fff;
+  word-wrap: break-word;
+}
+
+.bubble.out{
+  margin-left:auto;
+  background:var(--accent);
+  color:white;
+}
+
+.bubble.in{
+  margin-right:auto;
+  background:white;
+  color:#111827;
+}
+
+/* Meta info */
+.meta{
+  font-size:11px;
+  color:rgba(0,0,0,0.45);
+  margin-top:6px;
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+/* Composer */
+.composer{
+  display:flex;
+  gap:8px;
+  padding:12px;
+  border-top:1px solid #eee;
+  background:#fff;
+}
+
+.composer input{
+  flex:1;
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid #e5e7eb;
+  font-size: 15px;
+  outline: none;
+}
+
+.composer button{
+  padding:8px 14px;
+  border-radius:999px;
+  border:none;
+  background:var(--accent);
+  color:white;
+  cursor:pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.composer button:hover{
+  background: #128c4a;
+}
+
+/* Empty state */
+.empty{
+  padding:24px;
+  color:var(--muted);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Scrollbar for WebKit */
+.messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+
+/* Responsive Mobile Styles */
+@media (max-width: 720px) {
+  .app {
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* Sidebar initially visible full screen */
+  .sidebar {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--side);
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    z-index: 100;
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+  }
+
+  /* Hide sidebar when chat open */
+  .sidebar.hidden {
+    transform: translateX(-100%);
+  }
+
+  .chat-area {
+    width: 100%;
+    height: 100vh;
+    flex: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Chat window fullscreen on mobile */
+  .chat-window {
+    height: 100%;
+  }
+
+  /* Show back button */
+  .back-btn {
+    display: inline-block;
+  }
+}
